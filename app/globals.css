@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600&display=swap");
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(circle at 20% 10%, #2a1810 0%, #120a06 60%, #06030a 100%);
+  color: #f5ecd7;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Page (book leaf) styling */
+.page {
+  background: #f5ecd7;
+  background-image:
+    radial-gradient(ellipse at top, rgba(255,255,255,0.5), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(184,134,11,0.18), transparent 60%);
+  color: #2b1d0e;
+  padding: 36px 40px;
+  box-shadow: inset 0 0 60px rgba(120,80,30,0.18);
+  overflow-y: auto;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: var(--page-font-size, 17px);
+  line-height: 1.6;
+}
+.page h1, .page h2, .page h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #6b1e2b;
+}
+.page h1 { font-size: 28px; margin-bottom: 8px; }
+.page h2 { font-size: 22px; margin: 18px 0 6px; }
+.page h3 { font-size: 18px; margin: 12px 0 4px; color: #b8860b; }
+.page p { margin: 8px 0; }
+.page ul { padding-left: 22px; margin: 8px 0; }
+.page li { margin: 4px 0; }
+.page .page-number {
+  position: absolute; bottom: 14px; left: 0; right: 0;
+  text-align: center; font-size: 12px; color: #8a6a3a; font-family: 'Inter', sans-serif;
+}
+.page-cover {
+  background: linear-gradient(135deg, #6b1e2b 0%, #3a0f18 100%) !important;
+  color: #f5ecd7 !important;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  border: 8px double #b8860b;
+}
+.page-cover h1 {
+  color: #f5ecd7 !important;
+  font-size: 44px; line-height: 1.1; margin: 0 24px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.page-cover .ornament {
+  font-size: 36px; color: #b8860b; margin: 18px 0;
+}
+.page-cover p { font-family: 'Cormorant Garamond', serif; font-size: 20px; opacity: 0.9; }
+
+.callout {
+  background: rgba(184,134,11,0.12);
+  border-left: 4px solid #b8860b;
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+.callout.tip { border-left-color: #2e7d32; background: rgba(46,125,50,0.10); }
+.callout.fun { border-left-color: #6b1e2b; background: rgba(107,30,43,0.10); }
+
+.mermaid-wrap {
+  background: #fffdf6;
+  border: 1px solid #d9c89a;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 14px 0;
+  overflow-x: auto;
+  cursor: zoom-in;
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+.mermaid-wrap:hover {
+  box-shadow: 0 4px 16px rgba(107,30,43,0.25);
+}
+.mermaid-wrap::after {
+  content: "🔍";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 14px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Diagram lightbox modal ─────────────────────────────────────────────── */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(10,5,2,0.85);
+  z-index: 1000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+.lightbox-stage {
+  flex: 1; width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  overflow: auto;
+  cursor: grab;
+}
+.lightbox-stage:active { cursor: grabbing; }
+.lightbox-stage > div {
+  background: #fffdf6;
+  border-radius: 8px;
+  padding: 24px;
+  transform-origin: center center;
+  transition: transform 0.15s ease-out;
+  max-width: 95vw;
+}
+.lightbox-stage svg {
+  width: min(92vw, 1400px) !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block;
+}
+.lightbox-bar {
+  display: flex; gap: 8px; align-items: center;
+  margin-top: 16px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(184,134,11,0.5);
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+.lightbox-bar button {
+  background: transparent;
+  color: #f5ecd7;
+  border: 1px solid rgba(184,134,11,0.5);
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.lightbox-bar button:hover { background: rgba(184,134,11,0.2); }
+.lightbox-bar .zoom-label {
+  color: #f5ecd7; font-size: 12px; min-width: 50px; text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Scrollbar on page */
+.page::-webkit-scrollbar { width: 8px; }
+.page::-webkit-scrollbar-thumb { background: rgba(107,30,43,0.4); border-radius: 4px; }
