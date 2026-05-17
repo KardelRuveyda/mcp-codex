@@ -1,7 +1,7 @@
 import BookViewer from "@/components/BookViewer";
 import Link from "next/link";
 
-export default function BookPage() {
+export default function TheoryBookPage() {
   return (
     <main className="min-h-screen flex flex-col">
       <header className="flex items-center justify-between px-6 py-3 border-b border-gold/20">
@@ -9,10 +9,10 @@ export default function BookPage() {
           ← THE MCP CODEX
         </Link>
         <span className="text-parchment/60 text-xs hidden md:block">
-          Drag a corner to turn the page · Köşeden tutup sayfayı çevirin
+          📖 Volume I — Theory
         </span>
       </header>
-      <BookViewer />
+      <BookViewer editionKey="theory" />
     </main>
   );
 }

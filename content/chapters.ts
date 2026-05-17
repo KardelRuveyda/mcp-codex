@@ -1098,3 +1098,136 @@ export const chapters: Chapter[] = [
     ],
   },
 ];
+
+// ═════════════════════════════════════════════════════════════════════════════
+// EDITIONS — the codex now ships in two volumes: Theory and Examples.
+// `chapters` (above) is kept as the Theory volume. Examples lives below.
+// ═════════════════════════════════════════════════════════════════════════════
+
+export const theoryChapters: Chapter[] = chapters;
+
+// ── Examples volume ──────────────────────────────────────────────────────────
+const diagramFoundryMCP = `
+flowchart LR
+    subgraph FND["☁️ Microsoft Foundry"]
+      AG["🤖 Foundry Agent"]
+    end
+    AG <-->|MCP| S["🛠️ MCP Server<br/>(your tools)"]
+    S --> X1[("🗄️ Your Database")]
+    S --> X2[("🌐 Your REST API")]
+    S --> X3[("📁 Your Files")]
+`;
+
+export const examplesChapters: Chapter[] = [
+  {
+    id: 1,
+    title: {
+      en: "MCP × Microsoft Foundry",
+      tr: "MCP × Microsoft Foundry",
+    },
+    tagline: {
+      en: "Give your Foundry agent hands, through MCP.",
+      tr: "Foundry ajanınıza MCP üzerinden eller verin.",
+    },
+    pages: [
+      {
+        body: {
+          en: [
+            { t: "h2", v: "Why pair MCP with Foundry?" },
+            { t: "p", v: "Microsoft Foundry is a great place to host AI agents. Out of the box those agents are smart, but they don't yet know about your company's data or your internal tools. Plugging MCP in between gives the agent a uniform, discoverable way to reach all of that — without writing a custom connector for every system." },
+            { t: "fun", v: "Foundry is the stage. Your agent is the actor. MCP is the prop master that hands the actor the right object at the right moment." },
+            { t: "mermaid", v: diagramFoundryMCP },
+          ],
+          tr: [
+            { t: "h2", v: "MCP'yi Foundry ile neden eşleştirelim?" },
+            { t: "p", v: "Microsoft Foundry, AI ajanlarını barındırmak için harika bir yer. Kutudan çıktığı haliyle bu ajanlar zekidir ama henüz şirketinizin verilerini ya da iç araçlarını bilmezler. Araya MCP koymak, ajana her sisteme tek tip ve keşfedilebilir bir yoldan erişim sağlar — her sistem için özel bağlayıcı yazmaya gerek kalmadan." },
+            { t: "fun", v: "Foundry sahne. Ajanınız oyuncu. MCP ise oyuncuya tam zamanında doğru aksesuarı uzatan sahne sorumlusu." },
+            { t: "mermaid", v: diagramFoundryMCP },
+          ],
+        },
+      },
+      {
+        body: {
+          en: [
+            { t: "h2", v: "The shape of the setup" },
+            { t: "p", v: "On the Foundry side, you author an agent the usual way. On the other side, you run an MCP server next to the data and tools you care about. The agent is configured to know that this server exists and to talk to it through the MCP protocol — and that's the whole picture." },
+            { t: "ul", v: [
+              "🏠 Host = the Foundry runtime that runs your agent.",
+              "🛠️ Server = your MCP server, sitting next to your data.",
+              "🔌 Wire = the MCP protocol between them.",
+            ] },
+            { t: "note", v: "This is a starter chapter. As you build real Foundry + MCP integrations, drop the worked examples here." },
+          ],
+          tr: [
+            { t: "h2", v: "Kurulumun şekli" },
+            { t: "p", v: "Foundry tarafında ajanı her zamanki gibi yazarsınız. Diğer tarafta ise önemsediğiniz veri ve araçların yanında bir MCP server çalıştırırsınız. Ajan, bu server'ın var olduğunu bilmesi ve onunla MCP protokolü üzerinden konuşması için yapılandırılır — toplam tablo bu kadar." },
+            { t: "ul", v: [
+              "🏠 Host = ajanınızı çalıştıran Foundry çalışma zamanı.",
+              "🛠️ Server = verilerinizin yanında oturan MCP server'ınız.",
+              "🔌 Kablo = aradaki MCP protokolü.",
+            ] },
+            { t: "note", v: "Bu bir başlangıç bölümü. Gerçek Foundry + MCP entegrasyonları yaptıkça, uygulamalı örnekleri buraya ekleyin." },
+          ],
+        },
+      },
+    ],
+  },
+];
+
+// ── Editions registry ────────────────────────────────────────────────────────
+export type EditionKey = "theory" | "examples";
+
+export interface EditionMeta {
+  key: EditionKey;
+  chapters: Chapter[];
+  title: I18n<string>;       // shown on the book cover
+  subtitle: I18n<string>;    // small line under the title
+  shelfTitle: I18n<string>;  // shown on the landing-page card
+  shelfBlurb: I18n<string>;  // one-line description on the card
+  emoji: string;
+}
+
+export const EDITIONS: Record<EditionKey, EditionMeta> = {
+  theory: {
+    key: "theory",
+    chapters: theoryChapters,
+    emoji: "📖",
+    title: {
+      en: "The MCP Codex · Theory",
+      tr: "MCP Kitabı · Teori",
+    },
+    subtitle: {
+      en: "An Illustrated Guide to the Model Context Protocol",
+      tr: "Model Context Protocol için Resimli Rehber",
+    },
+    shelfTitle: {
+      en: "Theory",
+      tr: "Teori",
+    },
+    shelfBlurb: {
+      en: "Concepts, architecture, vocabulary. Start here.",
+      tr: "Kavramlar, mimari, terminoloji. Buradan başlayın.",
+    },
+  },
+  examples: {
+    key: "examples",
+    chapters: examplesChapters,
+    emoji: "🧪",
+    title: {
+      en: "The MCP Codex · Examples",
+      tr: "MCP Kitabı · Örnekler",
+    },
+    subtitle: {
+      en: "MCP in the wild — real platforms, real wiring.",
+      tr: "Doğal ortamında MCP — gerçek platformlar, gerçek bağlantılar.",
+    },
+    shelfTitle: {
+      en: "Examples",
+      tr: "Örnekler",
+    },
+    shelfBlurb: {
+      en: "MCP × Foundry and more — hands-on chapters.",
+      tr: "MCP × Foundry ve dahası — uygulamalı bölümler.",
+    },
+  },
+};

@@ -1,7 +1,16 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { chapters, LANGUAGES, UI, pick, flagUrl, type Lang } from "@/content/chapters";
+import {
+  LANGUAGES,
+  UI,
+  pick,
+  flagUrl,
+  EDITIONS,
+  type Lang,
+  type EditionKey,
+  type Chapter,
+} from "@/content/chapters";
 import Mermaid from "./Mermaid";
 
 const HTMLFlipBook: any = dynamic(() => import("react-pageflip"), { ssr: false });
@@ -25,7 +34,7 @@ type PageDef =
       render: (lang: Lang) => { node: React.ReactNode; isFallback: boolean };
     };
 
-function buildPages(): PageDef[] {
+function buildPages(chapters: Chapter[]): PageDef[] {
   const out: PageDef[] = [{ type: "cover" }];
   let n = 1;
   for (const ch of chapters) {
@@ -157,16 +166,19 @@ function LanguageDropdown({ lang, onChange }: { lang: Lang; onChange: (l: Lang) 
   );
 }
 
-export default function BookViewer() {
+export default function BookViewer({ editionKey }: { editionKey: EditionKey }) {
+  const edition = EDITIONS[editionKey];
   const [lang, setLang] = useState<Lang>("en");
   const [page, setPage] = useState(0);
   const [fontSize, setFontSize] = useState(17); // px, base for .page text
   const [flip, setFlip] = useState<any>(null);
 
-  const pages = useMemo(() => buildPages(), []);
+  const pages = useMemo(() => buildPages(edition.chapters), [edition]);
   const total = pages.length;
   const ui = UI[lang];
   const langMeta = LANGUAGES.find((l) => l.code === lang)!;
+  const coverTitle = pick(edition.title, lang).value;
+  const coverSubtitle = pick(edition.subtitle, lang).value;
 
   const dec = () => setFontSize((s) => Math.max(12, s - 1));
   const inc = () => setFontSize((s) => Math.min(28, s + 1));
@@ -254,9 +266,9 @@ export default function BookViewer() {
                 <div key={i} className="page page-cover" data-density="hard">
                   <p className="tracking-[0.4em] text-xs opacity-80">{ui.cover_kicker}</p>
                   <div className="ornament">❦ ⚜ ❦</div>
-                  <h1>The MCP Codex</h1>
+                  <h1>{coverTitle}</h1>
                   <div className="ornament">⚜</div>
-                  <p>{ui.cover_subtitle}</p>
+                  <p>{coverSubtitle}</p>
                 </div>
               );
             }
