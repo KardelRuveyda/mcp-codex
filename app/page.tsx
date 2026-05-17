@@ -18,11 +18,11 @@ const cards = [
     emoji: "🧪",
     badge: "VOLUME II",
     title: "Examples",
-    blurb: "MCP in the wild — real platforms, real wiring.",
+    blurb: "MCP in the wild — coming soon.",
     bullets: [
-      "MCP × Microsoft Foundry",
       "Hands-on integrations",
-      "Growing with every chapter",
+      "MCP × Microsoft Foundry & more",
+      "Filling up chapter by chapter",
     ],
   },
 ];

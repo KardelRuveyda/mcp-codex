@@ -1107,66 +1107,33 @@ export const chapters: Chapter[] = [
 export const theoryChapters: Chapter[] = chapters;
 
 // ── Examples volume ──────────────────────────────────────────────────────────
-const diagramFoundryMCP = `
-flowchart LR
-    subgraph FND["☁️ Microsoft Foundry"]
-      AG["🤖 Foundry Agent"]
-    end
-    AG <-->|MCP| S["🛠️ MCP Server<br/>(your tools)"]
-    S --> X1[("🗄️ Your Database")]
-    S --> X2[("🌐 Your REST API")]
-    S --> X3[("📁 Your Files")]
-`;
-
+// Intentionally empty for now — content will be added chapter by chapter.
+// A single "coming soon" placeholder page is shown so the volume is openable.
 export const examplesChapters: Chapter[] = [
   {
-    id: 1,
+    id: 0,
     title: {
-      en: "MCP × Microsoft Foundry",
-      tr: "MCP × Microsoft Foundry",
+      en: "Coming soon",
+      tr: "Yakında",
     },
     tagline: {
-      en: "Give your Foundry agent hands, through MCP.",
-      tr: "Foundry ajanınıza MCP üzerinden eller verin.",
+      en: "This volume is still being written.",
+      tr: "Bu cilt hâlâ yazılıyor.",
     },
     pages: [
       {
         body: {
           en: [
-            { t: "h2", v: "Why pair MCP with Foundry?" },
-            { t: "p", v: "Microsoft Foundry is a great place to host AI agents. Out of the box those agents are smart, but they don't yet know about your company's data or your internal tools. Plugging MCP in between gives the agent a uniform, discoverable way to reach all of that — without writing a custom connector for every system." },
-            { t: "fun", v: "Foundry is the stage. Your agent is the actor. MCP is the prop master that hands the actor the right object at the right moment." },
-            { t: "mermaid", v: diagramFoundryMCP },
+            { t: "h2", v: "Stay tuned ✨" },
+            { t: "p", v: "The Examples volume is being assembled, chapter by chapter, as new integrations are tried out in the wild — Microsoft Foundry and friends are on the way." },
+            { t: "p", v: "In the meantime, head back to the Theory volume to learn the foundations." },
+            { t: "tip", v: "Want to help fill this volume? See the Contributing section in the README on GitHub." },
           ],
           tr: [
-            { t: "h2", v: "MCP'yi Foundry ile neden eşleştirelim?" },
-            { t: "p", v: "Microsoft Foundry, AI ajanlarını barındırmak için harika bir yer. Kutudan çıktığı haliyle bu ajanlar zekidir ama henüz şirketinizin verilerini ya da iç araçlarını bilmezler. Araya MCP koymak, ajana her sisteme tek tip ve keşfedilebilir bir yoldan erişim sağlar — her sistem için özel bağlayıcı yazmaya gerek kalmadan." },
-            { t: "fun", v: "Foundry sahne. Ajanınız oyuncu. MCP ise oyuncuya tam zamanında doğru aksesuarı uzatan sahne sorumlusu." },
-            { t: "mermaid", v: diagramFoundryMCP },
-          ],
-        },
-      },
-      {
-        body: {
-          en: [
-            { t: "h2", v: "The shape of the setup" },
-            { t: "p", v: "On the Foundry side, you author an agent the usual way. On the other side, you run an MCP server next to the data and tools you care about. The agent is configured to know that this server exists and to talk to it through the MCP protocol — and that's the whole picture." },
-            { t: "ul", v: [
-              "🏠 Host = the Foundry runtime that runs your agent.",
-              "🛠️ Server = your MCP server, sitting next to your data.",
-              "🔌 Wire = the MCP protocol between them.",
-            ] },
-            { t: "note", v: "This is a starter chapter. As you build real Foundry + MCP integrations, drop the worked examples here." },
-          ],
-          tr: [
-            { t: "h2", v: "Kurulumun şekli" },
-            { t: "p", v: "Foundry tarafında ajanı her zamanki gibi yazarsınız. Diğer tarafta ise önemsediğiniz veri ve araçların yanında bir MCP server çalıştırırsınız. Ajan, bu server'ın var olduğunu bilmesi ve onunla MCP protokolü üzerinden konuşması için yapılandırılır — toplam tablo bu kadar." },
-            { t: "ul", v: [
-              "🏠 Host = ajanınızı çalıştıran Foundry çalışma zamanı.",
-              "🛠️ Server = verilerinizin yanında oturan MCP server'ınız.",
-              "🔌 Kablo = aradaki MCP protokolü.",
-            ] },
-            { t: "note", v: "Bu bir başlangıç bölümü. Gerçek Foundry + MCP entegrasyonları yaptıkça, uygulamalı örnekleri buraya ekleyin." },
+            { t: "h2", v: "Takipte kalın ✨" },
+            { t: "p", v: "Examples cildi, sahada denenen yeni entegrasyonlarla bölüm bölüm derleniyor — Microsoft Foundry ve dostları yolda." },
+            { t: "p", v: "Bu arada temelleri öğrenmek için Theory cildine geri dönebilirsiniz." },
+            { t: "tip", v: "Bu cildi doldurmaya yardım etmek ister misiniz? GitHub'daki README'deki Contributing bölümüne bakın." },
           ],
         },
       },
