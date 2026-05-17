@@ -3,7 +3,9 @@
 > A living, multilingual, page‑flipping illustrated book about the **Model Context Protocol (MCP)** — grown from notes, transcripts, and everything I learn along the way.
 
 <p align="center">
-  <img src="screenshots/cover.png" alt="The MCP Codex — cover" width="820" />
+  <a href="https://kardelruveyda.github.io/mcp-codex/">
+    <img src="https://img.shields.io/badge/READ%20THE%20BOOK-LIVE-6b1e2b?style=for-the-badge&logo=readme&logoColor=f5ecd7" alt="Read the book" />
+  </a>
 </p>
 
 <p align="center">
@@ -20,55 +22,22 @@
 
 ---
 
+## 🌐 Live
+
+**Read it here:** <https://kardelruveyda.github.io/mcp-codex/>
+
+The site is automatically rebuilt and republished on every push to `main` via GitHub Actions + GitHub Pages.
+
+---
+
 ## ✨ What is this?
 
 **The MCP Codex** is a small Next.js app that turns everything I'm learning about the Model Context Protocol into a beautiful, parchment‑styled flip‑book.
 
 - Designed for **anyone who wants to understand what MCP is and how to use it** — no prior background needed.
 - Concepts are explained at a friendly level, with **fun analogies, callouts, and Mermaid diagrams** for every important idea.
-- Available in **25 languages** with automatic fallback to English when a translation is still pending.
+- Available in **25 languages**, with automatic fallback to English when a translation is still pending.
 - **No accounts. No tracking. No progress saved.** Just pages to turn.
-
----
-
-## 🖼️ A peek inside
-
-| Cover | The book | Diagrams |
-|---|---|---|
-| ![Cover page](screenshots/cover.png) | ![Inside the book](screenshots/book.png) | ![Diagram zoom](screenshots/diagram-zoom.png) |
-
-| Language picker | Font size controls | Multilingual content |
-|---|---|---|
-| ![Language picker](screenshots/languages.png) | ![Font controls](screenshots/font-controls.png) | ![Turkish page](screenshots/turkish.png) |
-
-> 💡 _Drop your own screenshots into the `screenshots/` folder using the same file names to make these images appear._
-
----
-
-## 📚 Reading the book
-
-```bash
-npm install
-npm run dev
-```
-
-Then open <http://localhost:3000> → **OPEN THE BOOK**.
-
-- **Turn pages** by dragging a corner, or using the **◀ Prev / Next ▶** buttons.
-- **Click any diagram** to enlarge it full‑screen (✕ Close or `Esc` to exit).
-- **Change language** via the flag dropdown — 25 languages, RTL aware.
-- **Resize text** with `A−` / `A+` (12–28 px).
-
----
-
-## 🌍 Languages
-
-🇬🇧 English · 🇹🇷 Türkçe · 🇩🇪 Deutsch · 🇪🇸 Español · 🇫🇷 Français · 🇮🇹 Italiano · 🇵🇹 Português ·
-🇳🇱 Nederlands · 🇵🇱 Polski · 🇷🇺 Русский · 🇺🇦 Українська · 🇬🇷 Ελληνικά · 🇸🇪 Svenska ·
-🇷🇴 Română · 🇨🇿 Čeština · 🇭🇺 Magyar · 🇮🇩 Bahasa Indonesia · 🇻🇳 Tiếng Việt · 🇮🇳 हिन्दी ·
-🇨🇳 中文 · 🇯🇵 日本語 · 🇰🇷 한국어 · 🇸🇦 العربية · 🇮🇱 עברית · 🇮🇷 فارسی
-
-English is the source. Pages without a translation gracefully fall back to English and show a small notice in the reader's chosen language.
 
 ---
 
@@ -84,7 +53,40 @@ Each chapter is a sequence of pages defined as typed content blocks (`h2`, `h3`,
 
 ---
 
-## 🛠️ Project structure
+## 🌍 Languages
+
+🇬🇧 English · 🇹🇷 Türkçe · 🇩🇪 Deutsch · 🇪🇸 Español · 🇫🇷 Français · 🇮🇹 Italiano · 🇵🇹 Português ·
+🇳🇱 Nederlands · 🇵🇱 Polski · 🇷🇺 Русский · 🇺🇦 Українська · 🇬🇷 Ελληνικά · 🇸🇪 Svenska ·
+🇷🇴 Română · 🇨🇿 Čeština · 🇭🇺 Magyar · 🇮🇩 Bahasa Indonesia · 🇻🇳 Tiếng Việt · 🇮🇳 हिन्दी ·
+🇨🇳 中文 · 🇯🇵 日本語 · 🇰🇷 한국어 · 🇸🇦 العربية · 🇮🇱 עברית · 🇮🇷 فارسی
+
+English is the source. Pages without a translation gracefully fall back to English and show a small notice in the reader's chosen language.
+
+---
+
+## 🎛️ Reader features
+
+- 📖 **Real page‑flip animation** — drag a corner of a page to turn it.
+- 🔍 **Click any diagram** to enlarge it full‑screen (✕ Close or `Esc` to exit, mouse wheel to zoom).
+- 🌐 **Language dropdown** with real flag images (works on every OS).
+- 🔠 **Font size controls** (`A−` / `A+` / `RESET`, 12–28 px).
+- ↩️ **RTL aware** for Arabic, Hebrew and Persian.
+- ⚡ **Static site** — fast, cacheable, no backend.
+
+---
+
+## 🛠️ Run it locally
+
+```bash
+npm install
+npm run dev
+```
+
+Then open <http://localhost:3000> → **OPEN THE BOOK**.
+
+---
+
+## 🗂️ Project structure
 
 ```
 mcp-codex/
@@ -98,8 +100,9 @@ mcp-codex/
 │   └── Mermaid.tsx          # Inline diagram + portal lightbox
 ├── content/
 │   └── chapters.ts          # All chapters in all languages (single source of truth)
-├── screenshots/             # Images used in this README
-└── README.md
+├── .github/workflows/
+│   └── deploy.yml           # Static export + GitHub Pages deploy
+└── next.config.js           # output: "export", basePath for Pages
 ```
 
 ---
@@ -140,21 +143,22 @@ Open [content/chapters.ts](content/chapters.ts) and push a new object into `chap
 
 ---
 
-## 🚀 Deploying
+## 🚀 How it deploys
 
-The easiest path is **Vercel**:
+Every push to `main` triggers [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
 
-1. Push the repo to GitHub.
-2. Go to <https://vercel.com> → **New Project** → pick the repo.
-3. Default settings work out of the box — Vercel detects Next.js automatically.
+1. `npm ci`
+2. `npm run build` → static export into `out/`
+3. Upload `out/` as a Pages artifact
+4. Publish to <https://kardelruveyda.github.io/mcp-codex/>
 
 ---
 
 ## 🪄 Tech
 
-- [Next.js 14](https://nextjs.org/) (App Router)
+- [Next.js 14](https://nextjs.org/) (App Router · static export)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [react‑pageflip](https://www.npmjs.com/package/react-pageflip) for the book leafing animation
+- [react‑pageflip](https://www.npmjs.com/package/react-pageflip) for the leafing animation
 - [Mermaid](https://mermaid.js.org/) for the diagrams
 - Flag images from [flagcdn.com](https://flagcdn.com)
 
@@ -162,4 +166,4 @@ The easiest path is **Vercel**:
 
 ## 📜 License
 
-MIT for the code. The book text and diagrams are © Kardel Rüveyda Çetin — feel free to share with attribution.
+**MIT** for the code. The book text and diagrams are © Kardel Rüveyda Çetin — feel free to share with attribution.
