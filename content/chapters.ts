@@ -1097,6 +1097,278 @@ export const chapters: Chapter[] = [
       },
     ],
   },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CHAPTER 3 — RAG vs MCP
+  // ══════════════════════════════════════════════════════════════════════════
+  {
+    id: 3,
+    title: {
+      en: "RAG and MCP: know more vs. do more",
+      tr: "RAG ve MCP: daha fazlasını bilmek mi, yapmak mı?",
+      de: "RAG und MCP: mehr wissen vs. mehr tun",
+      es: "RAG y MCP: saber más vs. hacer más",
+      fr: "RAG et MCP : en savoir plus vs. en faire plus",
+      it: "RAG e MCP: sapere di più vs. fare di più",
+      pt: "RAG e MCP: saber mais vs. fazer mais",
+      ru: "RAG и MCP: знать больше или делать больше?",
+      zh: "RAG 与 MCP：是“多懂一些”还是“多做一些”？",
+      ja: "RAG と MCP：もっと知る か、もっと動く か",
+      ar: "RAG و MCP: المعرفة الأوسع أم الفعل الأكبر؟",
+    },
+    tagline: {
+      en: "Two famous acronyms, one clear difference — and one happy ending.",
+      tr: "İki ünlü kısaltma, tek net fark — ve mutlu bir son.",
+      de: "Zwei berühmte Abkürzungen, ein klarer Unterschied — und ein Happy End.",
+      es: "Dos siglas famosas, una diferencia clara — y un final feliz.",
+      fr: "Deux acronymes célèbres, une différence claire — et une happy end.",
+      it: "Due acronimi famosi, una differenza chiara — e un lieto fine.",
+      pt: "Duas siglas famosas, uma diferença clara — e um final feliz.",
+      ru: "Две громкие аббревиатуры, одно чёткое различие — и хорошая концовка.",
+      zh: "两个响亮的缩写，一个清晰的区别——还有一个圆满结局。",
+      ja: "有名な二つの略語、明確なひとつの違い、そしてハッピーエンド。",
+      ar: "اختصاران شهيران، فارق واضح واحد — ونهاية سعيدة.",
+    },
+    pages: [
+      // ── Page 1: the hook ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "Wait — RAG, MCP, what is going on?" },
+            { t: "p", v: "By now you've heard a lot of acronyms in AI land. Two of the loudest ones at the moment are RAG and MCP. People throw them around in the same sentence as if they were the same thing — and that's exactly why so many readers quietly nod and then go home confused. So let's clear it up, once and for all, in a single chapter." },
+            { t: "p", v: "Imagine your first day working at a small neighborhood bookstore. A customer walks in and asks: 'What's your return policy?' Then another asks: 'Do you still have Murakami's latest in stock, and can you order me one if not?' Two perfectly normal questions — but you need very different things to answer each one." },
+            { t: "fun", v: "An LLM on its own is like a brilliant new colleague who hasn't read the staff handbook and doesn't have a key to the stockroom. Charming, but not very useful — yet." },
+          ],
+          tr: [
+            { t: "h2", v: "Dur — RAG, MCP, neyin nesi?" },
+            { t: "p", v: "Şu ana kadar AI dünyasında bir sürü kısaltma duydunuz. Şu sıralar en gürültülü ikisi RAG ve MCP. İnsanlar bunları aynı cümlede sanki aynı şeymiş gibi atıp tutuyor — ve tam da bu yüzden çoğu okuyucu kibarca başını sallayıp eve kafası karışmış halde dönüyor. O zaman tek bir bölümde, bir kerede netleştirelim." },
+            { t: "p", v: "Mahallenin küçük bir kitapçısında ilk iş gününüzü düşünün. Bir müşteri içeri girip soruyor: 'İade politikanız nedir?' Hemen ardından bir başkası: 'Murakami'nin son kitabından stoğunuzda kaldı mı, yoksa benim için sipariş verir misiniz?' İki son derece olağan soru — ama her birine cevap vermek için çok farklı şeylere ihtiyacınız var." },
+            { t: "fun", v: "Tek başına bir LLM, personel el kitabını okumamış ve depo anahtarı olmayan yeni bir meslektaş gibidir. Sevimli, ama henüz pek işe yaramaz." },
+          ],
+        },
+      },
+
+      // ── Page 2: two needs of any LLM app ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "Two different needs, two different tricks" },
+            { t: "p", v: "An AI app really only ever needs two things from the outside world: knowledge and the ability to act. Once you see this split clearly, RAG and MCP slot neatly into their seats." },
+            { t: "ul", v: [
+              "📚 \"Help me know more.\" — Pull in the right information so the model can answer correctly. This is RAG's job.",
+              "🛠️ \"Help me do more.\" — Reach out to real systems, run real actions, change real state. This is MCP's job.",
+            ] },
+            { t: "mermaid", v: `flowchart LR
+    Q["❓ A question or task"] --> A{"What does the agent need?"}
+    A -->|"Know more"| R["📚 RAG<br/>fetch relevant text"]
+    A -->|"Do more"| M["🛠️ MCP<br/>call tools / systems"]
+    R --> ANS["💬 Grounded answer"]
+    M --> ACT["⚙️ Action performed"]` },
+            { t: "tip", v: "If your sentence ends with \"…tell me about X,\" you probably need RAG. If it ends with \"…and then book it / send it / update it,\" you probably need MCP." },
+          ],
+          tr: [
+            { t: "h2", v: "İki farklı ihtiyaç, iki farklı numara" },
+            { t: "p", v: "Bir AI uygulamasının dış dünyadan aslında yalnızca iki şeye ihtiyacı vardır: bilgi ve eyleme geçebilme yeteneği. Bu ayrımı net görünce, RAG ve MCP de kendi koltuklarına oturuverir." },
+            { t: "ul", v: [
+              "📚 \"Daha fazla bilmeme yardım et.\" — Modelin doğru cevap verebilmesi için doğru bilgiyi içeri çek. Bu RAG'ın işi.",
+              "🛠️ \"Daha fazlasını yapmama yardım et.\" — Gerçek sistemlere uzan, gerçek eylemler çalıştır, gerçek durumu değiştir. Bu da MCP'nin işi.",
+            ] },
+            { t: "mermaid", v: `flowchart LR
+    Q["❓ Bir soru ya da görev"] --> A{"Ajan neye ihtiyaç duyuyor?"}
+    A -->|"Daha fazla bilmek"| R["📚 RAG<br/>ilgili metni getir"]
+    A -->|"Daha fazlasını yapmak"| M["🛠️ MCP<br/>araç/sistem çağır"]
+    R --> ANS["💬 Dayanaklı cevap"]
+    M --> ACT["⚙️ Eylem gerçekleşti"]` },
+            { t: "tip", v: "Cümleniz \"…hakkında bana bilgi ver\" ile bitiyorsa muhtemelen RAG lazım. \"…ve sonra rezerve et / gönder / güncelle\" ile bitiyorsa muhtemelen MCP lazım." },
+          ],
+        },
+      },
+
+      // ── Page 3: RAG explained, 5 steps, with bookstore example ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "RAG — Retrieval-Augmented Generation" },
+            { t: "p", v: "RAG's whole reason to exist is to help the model know more. You keep a bunch of useful texts somewhere — staff handbooks, product manuals, internal wiki pages, articles, transcripts. When the user asks something, RAG fishes out the most relevant bits and quietly slips them into the model's prompt, so the answer is grounded in your real material instead of made up." },
+            { t: "h3", v: "Five small steps" },
+            { t: "mermaid", v: `flowchart LR
+    A1["1. ASK<br/>user types a question"] --> A2["2. RETRIEVE<br/>search the knowledge base"]
+    A2 --> A3["3. RETURN<br/>get the relevant passages"]
+    A3 --> A4["4. AUGMENT<br/>add them to the prompt"]
+    A4 --> A5["5. GENERATE<br/>LLM writes a grounded answer"]` },
+            { t: "p", v: "Back in the bookstore: a customer asks, 'What's your return policy?' Your RAG-equipped assistant searches the staff handbook, finds the paragraph that says returns are accepted within 30 days with a receipt, hands it to the model, and the model replies in a friendly, accurate sentence — and ideally tells you which page it came from so you can double-check." },
+            { t: "note", v: "RAG's data is usually static-ish and text-shaped: PDFs, web pages, markdown notes. Great for facts that someone already wrote down somewhere." },
+          ],
+          tr: [
+            { t: "h2", v: "RAG — Retrieval-Augmented Generation" },
+            { t: "p", v: "RAG'in tek varlık sebebi, modelin daha fazlasını bilmesine yardım etmektir. Bir yerlerde işe yarar metinler tutarsınız — personel el kitapları, ürün kılavuzları, dahili wiki sayfaları, makaleler, transkriptler. Kullanıcı bir şey sorduğunda RAG, en alakalı parçaları balık tutar gibi çekip sessizce modelin prompt'una ekler; böylece cevap uydurma değil, gerçek materyalinize dayanır." },
+            { t: "h3", v: "Beş küçük adım" },
+            { t: "mermaid", v: `flowchart LR
+    A1["1. SOR<br/>kullanıcı soruyu yazar"] --> A2["2. ARA<br/>bilgi tabanını tara"]
+    A2 --> A3["3. GETİR<br/>ilgili paragrafları al"]
+    A3 --> A4["4. ZENGİNLEŞTİR<br/>prompt'a ekle"]
+    A4 --> A5["5. ÜRET<br/>LLM dayanaklı cevabı yazar"]` },
+            { t: "p", v: "Kitapçıya geri dönelim: bir müşteri 'İade politikanız nedir?' diye soruyor. RAG'lı asistanınız personel el kitabını tarıyor, 'iadeler fişle birlikte 30 gün içinde kabul edilir' diyen paragrafı buluyor, modele uzatıyor; model de bunu sıcak ve doğru bir cümleye çeviriyor — ideal olarak hangi sayfadan geldiğini de söylüyor ki çapraz kontrol edebilesiniz." },
+            { t: "note", v: "RAG'ın verisi genelde sabit-ish ve metin biçimlidir: PDF'ler, web sayfaları, markdown notlar. Birinin zaten bir yerlere yazdığı bilgiler için harikadır." },
+          ],
+        },
+      },
+
+      // ── Page 4: MCP explained, 5 steps, with bookstore example ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "MCP — Model Context Protocol" },
+            { t: "p", v: "MCP's whole reason to exist is to help the model do more. Instead of feeding the model extra text, MCP gives it a hand: a structured way to call tools, query live systems, and change real state. We already met it in earlier chapters — now let's look at the flow with the same lens we used for RAG." },
+            { t: "h3", v: "Five small steps" },
+            { t: "mermaid", v: `flowchart LR
+    B1["1. DISCOVER<br/>ask server what tools exist"] --> B2["2. UNDERSTAND<br/>read each tool's schema"]
+    B2 --> B3["3. PLAN<br/>LLM picks tools and order"]
+    B3 --> B4["4. EXECUTE<br/>call them through MCP"]
+    B4 --> B5["5. INTEGRATE<br/>use results, maybe call again"]` },
+            { t: "p", v: "Back in the bookstore: a customer asks, 'Do you still have Murakami's latest in stock, and if not can you order one?' Your MCP-equipped assistant discovers an inventory tool and an order tool, plans to use them in that order, calls the inventory tool, sees there are zero copies left, and then calls the order tool to place a fresh order. Real action, real change." },
+            { t: "tip", v: "MCP's data is live and structured: stock levels, order numbers, calendar slots, payment statuses. Not paragraphs to read — buttons to push." },
+          ],
+          tr: [
+            { t: "h2", v: "MCP — Model Context Protocol" },
+            { t: "p", v: "MCP'nin tek varlık sebebi, modelin daha fazlasını yapmasına yardım etmektir. Modele ekstra metin beslemek yerine ona bir el uzatır: araç çağırmanın, canlı sistemleri sorgulamanın ve gerçek durumu değiştirmenin yapısal bir yolu. Önceki bölümlerde tanışmıştık — şimdi RAG'a baktığımız aynı mercekten akışına bakalım." },
+            { t: "h3", v: "Beş küçük adım" },
+            { t: "mermaid", v: `flowchart LR
+    B1["1. KEŞFET<br/>server'a hangi araçlar var diye sor"] --> B2["2. ANLA<br/>her aracın şemasını oku"]
+    B2 --> B3["3. PLANLA<br/>LLM araçları ve sırayı seçer"]
+    B3 --> B4["4. ÇALIŞTIR<br/>MCP üzerinden çağır"]
+    B4 --> B5["5. ENTEGRE ET<br/>sonuçları kullan, gerekirse tekrar çağır"]` },
+            { t: "p", v: "Kitapçıya geri: bir müşteri 'Murakami'nin son kitabı stokta mı, yoksa benim için sipariş verir misiniz?' diye soruyor. MCP'li asistanınız bir envanter tool'u ve bir sipariş tool'u keşfediyor, bu sırayla kullanmayı planlıyor, envantere bakıyor (sıfır kopya kalmış), ardından sipariş tool'unu çağırıp taze bir sipariş açıyor. Gerçek eylem, gerçek değişiklik." },
+            { t: "tip", v: "MCP'nin verisi canlı ve yapısaldır: stok seviyeleri, sipariş numaraları, takvim slotları, ödeme durumları. Okunacak paragraflar değil — basılacak düğmeler." },
+          ],
+        },
+      },
+
+      // ── Page 5: Venn diagram, similarities + key differences ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "Where they shake hands, where they part ways" },
+            { t: "mermaid", v: `flowchart TB
+    subgraph S["🤝 Both RAG and MCP"]
+      direction TB
+      S1["Bring outside knowledge to the LLM"]
+      S2["Reduce hallucinations by grounding it"]
+      S3["The real data lives outside the model"]
+    end
+    subgraph R["📚 RAG only"]
+      direction TB
+      R1["Reads documents"]
+      R2["Best for static text knowledge"]
+      R3["Cites the source passage"]
+    end
+    subgraph M["🛠️ MCP only"]
+      direction TB
+      M1["Calls live tools and systems"]
+      M2["Can change real state"]
+      M3["Discovers new tools at runtime"]
+    end` },
+            { t: "p", v: "Both pull data from outside the model and both make answers more trustworthy. That's the shared territory. The split happens in what they pull and what they do with it: RAG retrieves text, MCP triggers actions." },
+            { t: "fun", v: "RAG is a great librarian. MCP is a great office manager. You want both on your team, not one instead of the other." },
+          ],
+          tr: [
+            { t: "h2", v: "Nerede el sıkışıyorlar, nerede ayrılıyorlar" },
+            { t: "mermaid", v: `flowchart TB
+    subgraph S["🤝 Hem RAG hem MCP"]
+      direction TB
+      S1["LLM'e dışarıdan bilgi getirir"]
+      S2["Halüsinasyonu, dayanak vererek azaltır"]
+      S3["Gerçek veri modelin dışında yaşar"]
+    end
+    subgraph R["📚 Sadece RAG"]
+      direction TB
+      R1["Belgeleri okur"]
+      R2["Sabit metin bilgisi için ideal"]
+      R3["Kaynak paragrafı gösterir"]
+    end
+    subgraph M["🛠️ Sadece MCP"]
+      direction TB
+      M1["Canlı araç ve sistemleri çağırır"]
+      M2["Gerçek durumu değiştirebilir"]
+      M3["Yeni araçları çalışma anında keşfeder"]
+    end` },
+            { t: "p", v: "İkisi de modelin dışından veri çeker ve cevapları daha güvenilir kılar. Ortak alan bu. Ayrılık neyi çektiklerinde ve onunla ne yaptıklarında: RAG metin getirir, MCP eylem tetikler." },
+            { t: "fun", v: "RAG harika bir kütüphaneci. MCP harika bir ofis yöneticisi. İkisini de takımınızda istersiniz — birinin yerine diğerini değil." },
+          ],
+        },
+      },
+
+      // ── Page 6: when to use which ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "So which one should I use?" },
+            { t: "p", v: "A simple rule of thumb you can repeat to yourself before you start any AI feature:" },
+            { t: "ul", v: [
+              "🧠 If the answer already exists, written down somewhere — RAG.",
+              "🔧 If the answer requires checking or changing a live system — MCP.",
+              "🪄 If it requires both at the same time — well… see the next page.",
+            ] },
+            { t: "h3", v: "A quick smell test" },
+            { t: "ul", v: [
+              "\"Summarize our refund policy.\" → RAG.",
+              "\"Has order #4821 shipped yet?\" → MCP.",
+              "\"Cancel order #4821 and email the customer the refund policy.\" → both.",
+            ] },
+            { t: "note", v: "Choosing wrong isn't dangerous — it's just wasteful. RAG can't change anything, and MCP doesn't memorize documents. They each shine in their own corner." },
+          ],
+          tr: [
+            { t: "h2", v: "Peki hangisini kullanmalıyım?" },
+            { t: "p", v: "Yeni bir AI özelliğine başlamadan önce kendi kendinize tekrar edebileceğiniz basit bir pratik kural:" },
+            { t: "ul", v: [
+              "🧠 Cevap bir yerlerde zaten yazılıysa — RAG.",
+              "🔧 Cevap canlı bir sistemi kontrol etmeyi ya da değiştirmeyi gerektiriyorsa — MCP.",
+              "🪄 İkisini de aynı anda gerektiriyorsa — sonraki sayfaya bakın.",
+            ] },
+            { t: "h3", v: "Hızlı bir koku testi" },
+            { t: "ul", v: [
+              "\"İade politikamızı özetle.\" → RAG.",
+              "\"#4821 numaralı sipariş kargolandı mı?\" → MCP.",
+              "\"#4821 numaralı siparişi iptal et ve müşteriye iade politikasını e-postayla gönder.\" → ikisi de.",
+            ] },
+            { t: "note", v: "Yanlış seçmek tehlikeli değildir — sadece israftır. RAG hiçbir şeyi değiştiremez, MCP de belge ezberlemez. İkisi de kendi köşesinde parlar." },
+          ],
+        },
+      },
+
+      // ── Page 7: plot twist — MCP can use RAG as a tool + close ──
+      {
+        body: {
+          en: [
+            { t: "h2", v: "Plot twist: they can work together" },
+            { t: "p", v: "Here is the friendliest detail of the whole RAG-vs-MCP debate: it is not really an either/or. A modern AI agent often uses MCP as the way it reaches out to the outside world — and one of the tools that the MCP server exposes can be… a search over your knowledge base. In other words, MCP can call RAG." },
+            { t: "mermaid", v: `flowchart LR
+    AG["🤖 AI Agent"] -->|MCP| S["🛠️ MCP Server"]
+    S --> T1["🔧 placeOrder(...)"]
+    S --> T2["🔧 cancelOrder(...)"]
+    S --> T3["📚 searchHandbook(query)<br/>(RAG under the hood)"]
+    T3 --> KB[("📄 Knowledge base")]` },
+            { t: "p", v: "Going back one last time to our bookstore: a customer asks 'Cancel my order and tell me again how returns work.' The agent uses MCP to call cancelOrder, then uses MCP to call a searchHandbook tool that runs a RAG lookup over the staff manual, then composes one friendly reply that covers both things." },
+            { t: "fun", v: "RAG knows. MCP does. Used together, your AI app finally feels less like a brilliant intern and more like a colleague who has both read the handbook and has the keys to the stockroom." },
+            { t: "tip", v: "When you design an AI feature, don't ask \"RAG or MCP?\" Ask: \"Where does each piece of information live, and who is allowed to change it?\" The answer will tell you which pattern, or which mix, you need." },
+          ],
+          tr: [
+            { t: "h2", v: "Sürpriz: birlikte çalışabilirler" },
+            { t: "p", v: "Tüm RAG-vs-MCP tartışmasının en güzel detayı: aslında ya o ya bu değil. Modern bir AI ajanı çoğu zaman dış dünyaya MCP ile uzanır — ve MCP server'ın sunduğu tool'lardan biri pekâlâ bilgi tabanınızda arama yapan bir tool olabilir. Yani MCP, RAG'ı çağırabilir." },
+            { t: "mermaid", v: `flowchart LR
+    AG["🤖 AI Ajanı"] -->|MCP| S["🛠️ MCP Server"]
+    S --> T1["🔧 placeOrder(...)"]
+    S --> T2["🔧 cancelOrder(...)"]
+    S --> T3["📚 searchHandbook(query)<br/>(altında RAG çalışır)"]
+    T3 --> KB[("📄 Bilgi tabanı")]` },
+            { t: "p", v: "Son kez kitapçıya: bir müşteri 'Siparişimi iptal et ve iadelerin nasıl çalıştığını yeniden anlat.' diyor. Ajan MCP üzerinden cancelOrder'ı çağırıyor, sonra yine MCP üzerinden searchHandbook adlı bir tool'u çağırıyor — bu tool da arka planda personel el kitabında RAG aramasını çalıştırıyor. Ajan sonunda iki konuyu da kapsayan tek bir dostça cevap yazıyor." },
+            { t: "fun", v: "RAG bilir. MCP yapar. İkisi birlikte kullanıldığında, AI uygulamanız nihayet zeki bir stajyerden çok; el kitabını okumuş ve depo anahtarı olan bir meslektaşa benzemeye başlar." },
+            { t: "tip", v: "Bir AI özelliği tasarlarken \"RAG mi MCP mi?\" diye sormayın. Sorun: \"Her bilgi parçası nerede yaşıyor ve onu değiştirmeye kimin izni var?\" Cevap, hangi deseni — ya da hangi karışımı — kullanacağınızı size söyler." },
+          ],
+        },
+      },
+    ],
+  },
 ];
 
 // ═════════════════════════════════════════════════════════════════════════════
