@@ -164,6 +164,124 @@ Every push to `main` triggers [.github/workflows/deploy.yml](.github/workflows/d
 
 ---
 
+## 🤝 Contributing
+
+Contributions are very welcome — translations, typo fixes, new chapters, even a single sentence rewrite. The book lives or dies by being clear and friendly, so every set of fresh eyes helps.
+
+### What you can contribute
+
+- 🌐 **A translation** of an existing page (the most useful single thing you can do).
+- 📝 **A fix** for a typo, awkward sentence, or unclear explanation.
+- 🌱 **A new chapter** based on a video / article you found useful (see content rules below).
+- 🎨 **Visual / UX polish** — better diagrams, better styles, accessibility improvements.
+- 🐛 **Bug reports** via [GitHub Issues](https://github.com/KardelRuveyda/mcp-codex/issues).
+
+### Quick start (for any change)
+
+1. **Fork** this repo, then clone your fork.
+2. Create a branch:
+   ```bash
+   git checkout -b my-change
+   ```
+3. Install and run locally to see your edit live:
+   ```bash
+   npm install
+   npm run dev
+   ```
+4. Edit the right file (see below), check it in the browser, commit, push, then open a **Pull Request** against `main`.
+
+### Where things live
+
+| You want to… | Edit |
+|---|---|
+| Translate a page or fix a sentence | [content/chapters.ts](content/chapters.ts) |
+| Add a whole new chapter | [content/chapters.ts](content/chapters.ts) (push into `chapters`) |
+| Add a brand new language | [content/chapters.ts](content/chapters.ts) (`LANGUAGES` + `UI`) |
+| Change the reader UI | [components/BookViewer.tsx](components/BookViewer.tsx) |
+| Change the cover / landing page | [app/page.tsx](app/page.tsx) |
+| Change styling | [app/globals.css](app/globals.css) |
+
+### Adding a translation (the most common case)
+
+Open [content/chapters.ts](content/chapters.ts), find the page you want to translate, and add your language key next to `en`. Example — translating Chapter 1, page 1 into German:
+
+```ts
+body: {
+  en: [ /* …existing… */ ],
+  tr: [ /* …existing… */ ],
+  de: [
+    { t: "h2", v: "Es war einmal ein KI-Agent…" },
+    { t: "p",  v: "Stell dir vor, du hast einen klugen KI-Assistenten gebaut…" },
+    // …same block types in the same order
+  ],
+}
+```
+
+Rules of thumb for translations:
+
+- Keep the **same block order** as the English version so diagrams stay in the same spot.
+- Mermaid diagrams are kept **language‑neutral** (English labels) on purpose — please don't translate inside them.
+- Aim for a natural, friendly tone at roughly **B1 reading level**. It's a book for humans, not a spec.
+
+### Adding a new chapter
+
+If you want to add a chapter from your own source (video, article, talk), please follow these content rules — they keep the book legally clean and pleasant to read:
+
+- ✅ Take **concepts and structure** from your source.
+- ❌ **Do not** copy sentences verbatim. Paraphrase in your own words.
+- 🔄 **Replace named examples** from the source with your own original examples (different APIs, different tool names, different scenarios). This avoids both plagiarism and "I've read this exact thing before" fatigue.
+- 🎭 Keep it warm and a little playful — use the `tip` / `fun` / `note` callouts, not just walls of text.
+- 📐 Add at least one Mermaid diagram per chapter when it helps.
+
+Use this skeleton:
+
+```ts
+{
+  id: 99, // next free number
+  title:   { en: "Chapter title", tr: "Bölüm başlığı" },
+  tagline: { en: "One-line hook", tr: "Tek satır kanca" },
+  pages: [
+    {
+      body: {
+        en: [
+          { t: "h2", v: "Section heading" },
+          { t: "p",  v: "A friendly paragraph." },
+          { t: "ul", v: ["bullet one", "bullet two"] },
+          { t: "tip", v: "A handy little tip." },
+          { t: "mermaid", v: `flowchart LR; A-->B;` },
+        ],
+      },
+    },
+  ],
+}
+```
+
+Only `en` is required. Any other language is optional and will fall back to English automatically.
+
+### Adding a brand new language
+
+1. Append a new entry to the `LANGUAGES` array in [content/chapters.ts](content/chapters.ts) with an ISO country code for the flag:
+   ```ts
+   { code: "no", label: "Norsk", cc: "no", dir: "ltr" as const },
+   ```
+2. Add a matching block to the `UI` object with translations of every key.
+3. Optionally translate any pages you want covered. Untranslated pages fall back to English.
+
+### Pull request checklist
+
+Before opening a PR, please:
+
+- [ ] `npm run build` succeeds locally (catches type and content errors).
+- [ ] The page renders correctly in the browser (open it, flip to it, make sure diagrams and callouts look right).
+- [ ] You followed the **content rules** above for any new prose.
+- [ ] The PR description briefly explains _what_ changed and _why_ (one or two sentences is fine).
+
+### Code of conduct
+
+Be kind, be curious, assume good intent. That's it.
+
+---
+
 ## 📜 License
 
 **MIT** for the code. The book text and diagrams are © Kardel Rüveyda Çetin — feel free to share with attribution.
